@@ -2,15 +2,15 @@ package db
 
 import (
 	"database/sql"
-	"fmt"
+	"log"
 )
 
-func Connect() (*sql.DB, error) {
-	connStr := "user=janko dbname=company password=JankoKondic72621@ sslmode=disable"
-	db, err := sql.Open("postgres", connStr)
+var Conn *sql.DB
+
+func Connect() {
+	var err error
+	Conn, err = sql.Open("postgres", "user=janko dbname=company password=JankoKondic72621@ sslmode=disable")
 	if err != nil {
-		return nil, fmt.Errorf("Error opening database connection: %v", err)
+		log.Fatal(err)
 	}
-	
-	return db, nil
 }
